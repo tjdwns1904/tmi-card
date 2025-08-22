@@ -80,6 +80,10 @@
 }
 
 @layer utilities {
+  .bg-background {
+    background-color: hsl(var(--background));
+  }
+
   /* Primary */
   .bg-primary {
     background-color: hsl(var(--primary));

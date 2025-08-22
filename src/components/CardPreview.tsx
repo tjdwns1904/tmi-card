@@ -24,15 +24,10 @@ export function CardPreview({ question, answer, theme, cardRef }: CardPreviewPro
         <div
           ref={cardRef}
           className={`w-full h-full p-12 flex flex-col justify-between ${themeClass}`}
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-          }}
         >
           {/* Question Section */}
           <div className="text-center">
-            <div className="text-5xl font-bold mb-8">🃏</div>
+            <div className="text-4xl font-bold mb-8">🃏</div>
             <h1 className="text-4xl font-bold leading-tight mb-12">랜덤 TMI</h1>
             <div className="w-32 h-1 bg-current opacity-30 mx-auto mb-16"></div>
           </div>
@@ -40,7 +35,7 @@ export function CardPreview({ question, answer, theme, cardRef }: CardPreviewPro
           {/* Question Text */}
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center">
-              <p className="text-xl leading-relaxed font-medium">
+              <p className="text-2xl leading-relaxed font-medium">
                 {question || '버튼을 클릭하여 TMI 질문을 생성해주세요!'}
               </p>
             </div>
@@ -50,7 +45,7 @@ export function CardPreview({ question, answer, theme, cardRef }: CardPreviewPro
           <div className="text-center">
             <div className="w-32 h-1 bg-current opacity-30 mx-auto mt-16"></div>
             <div className="min-h-[300px] flex items-center justify-center">
-              <p className="text-xl leading-relaxed opacity-80 italic">
+              <p className="text-2xl leading-relaxed opacity-80 italic">
                 {answer || '답변이 여기 출력될 거예요...'}
               </p>
             </div>
