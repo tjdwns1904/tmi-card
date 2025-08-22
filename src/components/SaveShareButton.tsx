@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Download, Share } from 'lucide-react';
+import { Download, Leaf, Share } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import html2canvas from 'html2canvas';
+import { position } from 'html2canvas/dist/types/css/property-descriptors/position';
 
 interface SaveShareButtonProps {
   cardRef: React.RefObject<HTMLDivElement>;
@@ -17,15 +18,21 @@ export function SaveShareButton({ cardRef, disabled }: SaveShareButtonProps) {
     if (!cardRef.current) return;
 
     setIsExporting(true);
-    
+
     try {
       const canvas = await html2canvas(cardRef.current, {
-        scale: 2,
+        scale: 1,
         width: 1080,
         height: 1920,
         backgroundColor: null,
         useCORS: true,
-        allowTaint: true
+        allowTaint: true,
+        onclone: (doc) => {
+          const el = doc.getElementById('preview');
+          el.style.width = '1080px';
+          el.style.height = '1920px';
+          el.style.zoom = '1';
+        },
       });
 
       const blob = await new Promise<Blob>((resolve) => {
@@ -40,11 +47,11 @@ export function SaveShareButton({ cardRef, disabled }: SaveShareButtonProps) {
           await navigator.share({
             title: 'My TMI Card',
             text: 'Check out my TMI card!',
-            files: [file]
+            files: [file],
           });
           toast({
-            title: "Shared successfully!",
-            description: "Your TMI card has been shared."
+            title: 'Shared successfully!',
+            description: 'Your TMI card has been shared.',
           });
           return;
         } catch (shareError) {
@@ -68,15 +75,15 @@ export function SaveShareButton({ cardRef, disabled }: SaveShareButtonProps) {
       URL.revokeObjectURL(url);
 
       toast({
-        title: "Download started!",
-        description: "Your TMI card is being downloaded."
+        title: 'Download started!',
+        description: 'Your TMI card is being downloaded.',
       });
     } catch (error) {
       console.error('Export failed:', error);
       toast({
-        title: "Export failed",
-        description: "Sorry, something went wrong. Please try again.",
-        variant: "destructive"
+        title: 'Export failed',
+        description: 'Sorry, something went wrong. Please try again.',
+        variant: 'destructive',
       });
     } finally {
       setIsExporting(false);
@@ -91,17 +98,8 @@ export function SaveShareButton({ cardRef, disabled }: SaveShareButtonProps) {
       disabled={disabled || isExporting}
       className="w-full bg-secondary hover:bg-secondary-hover text-secondary-foreground py-6 text-lg font-medium rounded-2xl transition-all duration-200"
     >
-      {hasNativeShare ? (
-        <Share className="w-5 h-5 mr-2" />
-      ) : (
-        <Download className="w-5 h-5 mr-2" />
-      )}
-      {isExporting
-        ? 'Exporting...'
-        : hasNativeShare
-        ? 'Share Card'
-        : 'Download PNG'
-      }
+      {hasNativeShare ? <Share className="w-5 h-5 mr-2" /> : <Download className="w-5 h-5 mr-2" />}
+      {isExporting ? 'Exporting...' : hasNativeShare ? 'Share Card' : 'Download PNG'}
     </Button>
   );
 }

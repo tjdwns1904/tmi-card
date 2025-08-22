@@ -22,6 +22,7 @@ export function CardPreview({ question, answer, theme, cardRef }: CardPreviewPro
         style={{ aspectRatio: '1080/1920' }}
       >
         <div
+          id="preview"
           ref={cardRef}
           className={`w-full h-full p-12 flex flex-col justify-between ${themeClass}`}
         >
