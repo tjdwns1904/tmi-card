@@ -1,0 +1,194 @@
+@import 'tailwindcss';
+
+@layer base {
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+
+  button {
+    cursor: pointer;
+  }
+}
+
+:root {
+  --background: 0 0% 98%;
+  --foreground: 230 15% 15%;
+
+  --card-minimal-bg: 0 0% 100%;
+  --card-minimal-text: 230 15% 15%;
+  --card-minimal-accent: 230 8% 60%;
+
+  --card-pastel-bg-start: 330 50% 95%;
+  --card-pastel-bg-end: 270 50% 95%;
+  --card-pastel-text: 260 20% 20%;
+  --card-pastel-accent: 290 30% 60%;
+
+  --primary: 270 60% 60%;
+  --primary-foreground: 0 0% 98%;
+  --primary-hover: 270 60% 55%;
+
+  --secondary: 230 10% 92%;
+  --secondary-foreground: 230 15% 25%;
+  --secondary-hover: 230 10% 88%;
+
+  --border: 230 8% 88%;
+  --input: 230 8% 95%;
+  --ring: 270 60% 60%;
+  --muted: 230 8% 96%;
+  --muted-foreground: 230 8% 55%;
+
+  --radius: 1rem;
+
+  --shadow-card: 0 8px 32px hsl(230 15% 15% / 0.08);
+  --shadow-button: 0 4px 16px hsl(270 60% 60% / 0.2);
+
+  /* container, screens */
+  --container-max-2xl: 1400px;
+  --container-padding: 2rem;
+}
+
+/* 테마 */
+.theme-minimal {
+  background-color: hsl(var(--card-minimal-bg));
+  color: hsl(var(--card-minimal-text));
+}
+.theme-pastel {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card-pastel-bg-start)),
+    hsl(var(--card-pastel-bg-end))
+  );
+  color: hsl(var(--card-pastel-text));
+}
+
+/* 그림자, radius */
+.card-shadow {
+  box-shadow: var(--shadow-card);
+}
+.button-shadow {
+  box-shadow: var(--shadow-button);
+}
+.rounded-lg {
+  border-radius: var(--radius);
+}
+.rounded-md {
+  border-radius: calc(var(--radius) - 2px);
+}
+.rounded-sm {
+  border-radius: calc(var(--radius) - 4px);
+}
+
+@layer utilities {
+  /* Primary */
+  .bg-primary {
+    background-color: hsl(var(--primary));
+  }
+  .text-primary {
+    color: hsl(var(--primary));
+  }
+  .bg-primary-foreground {
+    background-color: hsl(var(--primary-foreground));
+  }
+  .text-primary-foreground {
+    color: hsl(var(--primary-foreground));
+  }
+  .bg-primary-hover {
+    background-color: hsl(var(--primary-hover));
+  }
+
+  /* Secondary */
+  .bg-secondary {
+    background-color: hsl(var(--secondary));
+  }
+  .text-secondary {
+    color: hsl(var(--secondary));
+  }
+  .bg-secondary-foreground {
+    background-color: hsl(var(--secondary-foreground));
+  }
+  .text-secondary-foreground {
+    color: hsl(var(--secondary-foreground));
+  }
+  .hover\:bg-secondary-hover:hover {
+    background-color: hsl(var(--secondary-hover));
+  }
+
+  /* Muted */
+  .bg-muted {
+    background-color: hsl(var(--muted));
+  }
+  .text-muted-foreground {
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Border, Input, Ring */
+  .border-border {
+    border-color: hsl(var(--border));
+  }
+  .bg-input {
+    background-color: hsl(var(--input));
+  }
+  .ring-ring {
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+
+  /* Card Minimal */
+  .bg-card-minimal {
+    background-color: hsl(var(--card-minimal-bg));
+  }
+  .text-card-minimal {
+    color: hsl(var(--card-minimal-text));
+  }
+  .accent-card-minimal {
+    color: hsl(var(--card-minimal-accent));
+  }
+
+  /* Card Pastel */
+  .bg-card-pastel-gradient {
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card-pastel-bg-start)),
+      hsl(var(--card-pastel-bg-end))
+    );
+  }
+  .text-card-pastel {
+    color: hsl(var(--card-pastel-text));
+  }
+  .accent-card-pastel {
+    color: hsl(var(--card-pastel-accent));
+  }
+}
+
+/* 컨테이너 유틸리티 (2xl 기준) */
+.container-2xl {
+  max-width: var(--container-max-2xl);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+/* 애니메이션 */
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+.animate-accordion-down {
+  animation: accordion-down 0.2s ease-out;
+}
+.animate-accordion-up {
+  animation: accordion-up 0.2s ease-out;
+}
