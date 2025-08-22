@@ -71,10 +71,12 @@ const Index = () => {
           )}
 
           {/* Theme Picker */}
-          <div className="space-y-2">
-            <label className="text-sm font-medium text-foreground">카드 테마:</label>
-            <ThemePicker theme={theme} onThemeChange={setTheme} />
-          </div>
+          {currentQuestion && (
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-foreground">카드 테마:</label>
+              <ThemePicker theme={theme} onThemeChange={setTheme} />
+            </div>
+          )}
         </div>
 
         {/* Card Preview */}
